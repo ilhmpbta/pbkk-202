@@ -10,21 +10,21 @@ class PageController extends Controller
     }
     
     public function mahasiswa($nrp) {
-        $view = "pages.mahasiswa.{$nrp}";
+        $view = "pages.dashboard.mahasiswa.{$nrp}";
         if (!view()->exists($view)) {
-            $view = 'pages.mahasiswa';
+            $view = 'pages.dashboard.mahasiswa';
         }
         return view($view, ['nrp' => $nrp]);
     }
 
     public function dashboard() {
-        return view('pages.dashboard');
+        return view('pages.dashboard.index');
     }
 
     public function hitungIpk($ip1, $ip2) {
         $total = $ip1 + $ip2;
         $rata  = $total / 2;
-        return view('pages.hitung-ipk', compact('ip1', 'ip2', 'total', 'rata'));
+        return view('pages.dashboard.hitung-ipk', compact('ip1', 'ip2', 'total', 'rata'));
     }
 
     public function agent($tema = null) {
