@@ -21,10 +21,10 @@ class PageController extends Controller
         return view('pages.dashboard');
     }
 
-    public function hitungIpk($ipk1, $ipk2) {
-        $total = $ipk1 + $ipk2;
+    public function hitungIpk($ip1, $ip2) {
+        $total = $ip1 + $ip2;
         $rata  = $total / 2;
-        return view('pages.hitung-ipk', compact('ipk1', 'ipk2', 'total', 'rata'));
+        return view('pages.hitung-ipk', compact('ip1', 'ip2', 'total', 'rata'));
     }
 
     public function agent($tema = null) {
