@@ -8,7 +8,11 @@ class PageController extends Controller
     public function welcome() {
         return view('pages.welcome');
     }
-    
+
+    public function mahasiswaIndex() {
+        return view('pages.dashboard.mahasiswa');
+    }
+
     public function mahasiswa($nrp) {
         $view = "pages.dashboard.mahasiswa.{$nrp}";
         if (!view()->exists($view)) {
@@ -28,8 +32,13 @@ class PageController extends Controller
     }
 
     public function agent($tema = null) {
-        $tema = $tema ?? 'General Assistant Agent';
-        return view('pages.agent', ['tema' => $tema]);
+        $isFallback = $tema === null;
+        $tema       = $tema ?? 'General Assistant Agent';
+    
+        return view('pages.agent', [
+            'tema'       => $tema,
+            'isFallback' => $isFallback,
+        ]);
     }
 
 }

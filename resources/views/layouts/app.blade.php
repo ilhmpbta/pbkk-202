@@ -20,7 +20,7 @@
         @include('components.navbar')
         
         <main class="flex-1 w-full">
-            <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8">
+            <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
                 @yield('content')
             </div>
         </main>
