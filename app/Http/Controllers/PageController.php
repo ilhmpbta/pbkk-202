@@ -32,8 +32,13 @@ class PageController extends Controller
     }
 
     public function agent($tema = null) {
-        $tema = $tema ?? 'General Assistant Agent';
-        return view('pages.agent', ['tema' => $tema]);
+        $isFallback = $tema === null;
+        $tema       = $tema ?? 'General Assistant Agent';
+    
+        return view('pages.agent', [
+            'tema'       => $tema,
+            'isFallback' => $isFallback,
+        ]);
     }
 
 }
