@@ -9,7 +9,7 @@
         'tagline'  => 'Fullstack learner · PBKK (B)',
         'bio'      => 'Mahasiswa Teknik Informatika ITS yang sedang mendalami arsitektur Laravel dan pola routing yang rapi. Tertarik pada sistem agentic yang dapat merencanakan langkahnya sendiri.',
         'email'    => '5025241107@student.its.ac.id',
-        'github'   => 'NewGenome',
+        'github'   => 'Akahazu',
         'city'     => 'Jakarta',
         'skills'   => ['Unknown'],
         'semesters' => [
