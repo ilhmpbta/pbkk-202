@@ -6,4 +6,158 @@
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* Custom palette tokens */
+    --color-surface: #161616;
+    --color-surface-raised: #1e1e1e;
+    --color-surface-card: #252525;
+    --color-border-subtle: #353535;
+    --color-accent: #78a9ff;
+    --color-accent-bright: #33b1ff;
+    --color-text-primary: #f2f4f8;
+    --color-text-muted: #7b7c7e;
+    --color-text-soft: #a4a4a4;
+}
+
+/* ---------- Keyframes ---------- */
+@keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(120, 169, 255, 0.4); }
+    50%      { box-shadow: 0 0 0 8px rgba(120, 169, 255, 0); }
+}
+
+@keyframes shimmer {
+    0%   { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-4px); }
+}
+
+@keyframes orbit {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+@keyframes gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+}
+
+/* ---------- Animation utilities ---------- */
+.animate-fade-in-up {
+    animation: fade-in-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-fade-in {
+    animation: fade-in 0.4s ease-out both;
+}
+
+.animate-pulse-glow {
+    animation: pulse-glow 2.5s ease-in-out infinite;
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.animate-orbit {
+    animation: orbit 12s linear infinite;
+}
+
+/* Staggered children */
+.stagger > * {
+    animation: fade-in-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.stagger > *:nth-child(1) { animation-delay: 0.05s; }
+.stagger > *:nth-child(2) { animation-delay: 0.10s; }
+.stagger > *:nth-child(3) { animation-delay: 0.15s; }
+.stagger > *:nth-child(4) { animation-delay: 0.20s; }
+.stagger > *:nth-child(5) { animation-delay: 0.25s; }
+.stagger > *:nth-child(6) { animation-delay: 0.30s; }
+.stagger > *:nth-child(7) { animation-delay: 0.35s; }
+.stagger > *:nth-child(8) { animation-delay: 0.40s; }
+
+/* ---------- Card hover lift ---------- */
+.card-lift {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.3s ease,
+                box-shadow 0.3s ease,
+                background-color 0.3s ease;
+}
+.card-lift:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px -12px rgba(120, 169, 255, 0.18);
+}
+
+/* ---------- Gradient text ---------- */
+.text-gradient {
+    background: linear-gradient(135deg, #78a9ff 0%, #33b1ff 50%, #78a9ff 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-shift 4s ease-in-out infinite;
+}
+
+/* ---------- Shimmer border ---------- */
+.shimmer-border {
+    position: relative;
+    overflow: hidden;
+}
+.shimmer-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(120, 169, 255, 0.5) 50%,
+        transparent 100%);
+    background-size: 200% 100%;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: shimmer 3s linear infinite;
+    pointer-events: none;
+}
+
+/* ---------- Link underline slide ---------- */
+.link-slide {
+    position: relative;
+}
+.link-slide::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #78a9ff;
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.link-slide:hover::after {
+    width: 100%;
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }
