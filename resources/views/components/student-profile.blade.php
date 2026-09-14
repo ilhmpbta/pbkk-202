@@ -19,9 +19,13 @@
 <div class="max-w-4xl mx-auto space-y-8">
     <section class="rounded-2xl border border-[#353535]/60 bg-[#252525]/60 backdrop-blur p-6 sm:p-8">
         <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-            <div class="w-20 h-20 rounded-full bg-[#78a9ff]/15 border border-[#78a9ff]/40
-                        flex items-center justify-center text-[#78a9ff] text-3xl font-semibold shrink-0">
-                {{ strtoupper(substr($name, 0, 1)) }}
+            <div class="relative w-20 h-20 shrink-0">
+                <div class="absolute inset-0 rounded-full border border-dashed border-[#78a9ff]/30 animate-orbit"></div>
+                <div class="absolute inset-1 rounded-full bg-[#78a9ff]/15 border border-[#78a9ff]/40
+                            flex items-center justify-center text-[#78a9ff] text-3xl font-semibold
+                            animate-pulse-glow">
+                    {{ strtoupper(substr($name, 0, 1)) }}
+                </div>
             </div>
 
             <div class="flex-1 min-w-0">
@@ -81,14 +85,23 @@
     </section>
 
     @if (!empty($semesters))
-        <section>
+        <section data-reveal>
             <h2 class="text-lg font-semibold text-[#f2f4f8] mb-3">Riwayat Studi</h2>
             <ol class="space-y-3">
-                @foreach ($semesters as $s)
-                    <li class="flex items-center gap-4 rounded-lg border border-[#353535]/60 bg-[#252525]/50 px-4 py-3">
-                        <span class="w-2 h-2 rounded-full bg-[#78a9ff] shrink-0"></span>
-                        <span class="text-sm text-[#f2f4f8] flex-1">{{ $s['label'] }}</span>
-                        <span class="text-sm font-mono text-[#33b1ff]">{{ number_format($s['ip'], 2) }}</span>
+                @foreach ($semesters as $i => $s)
+                    <li class="group relative overflow-hidden flex items-center gap-4 rounded-lg
+                               border border-[#353535]/60 bg-[#252525]/50 px-4 py-3
+                               transition-all duration-300 hover:border-[#78a9ff]/40">
+                        <div class="absolute inset-y-0 left-0 bg-[#78a9ff]/5 transition-all duration-700"
+                             style="width: {{ ($s['ip'] / 4) * 100 }}%"></div>
+    
+                        <span class="relative w-2 h-2 rounded-full bg-[#78a9ff] shrink-0
+                                     shadow-[0_0_8px_rgba(120,169,255,0.6)]"></span>
+                        <span class="relative text-sm text-[#f2f4f8] flex-1">{{ $s['label'] }}</span>
+                        <span class="relative text-sm font-mono text-[#33b1ff]
+                                     transition-transform duration-300 group-hover:scale-110">
+                            {{ number_format($s['ip'], 2) }}
+                        </span>
                     </li>
                 @endforeach
             </ol>
@@ -96,12 +109,14 @@
     @endif
 
     @if (!empty($skills))
-        <section>
+        <section data-reveal>
             <h2 class="text-lg font-semibold text-[#f2f4f8] mb-3">Minat &amp; Keahlian</h2>
-            <div class="flex flex-wrap gap-2">
+            <div class="flex flex-wrap gap-2 stagger">
                 @foreach ($skills as $skill)
                     <span class="px-2.5 py-1 text-xs rounded-full
-                                 bg-[#252525]/80 text-[#a4a4a4] border border-[#353535]/60">
+                                 bg-[#252525]/80 text-[#a4a4a4] border border-[#353535]/60
+                                 transition-all duration-200
+                                 hover:border-[#78a9ff]/50 hover:text-[#f2f4f8] hover:-translate-y-0.5">
                         {{ $skill }}
                     </span>
                 @endforeach
